@@ -97,8 +97,6 @@ export class PostsComponent implements OnInit, OnChanges {
 
     upVotePost(input: number) {
         this.postService.getPostById(input).subscribe(post => {
-            console.log(input);
-            console.log(post.postId);
             this.currentPost = post;
             this.postService.updatePost(
                 this.currentPost.postId,
@@ -121,9 +119,6 @@ export class PostsComponent implements OnInit, OnChanges {
     downVotePost(input: number) {
         this.postService.getPostById(input).subscribe(post => {
             this.currentPost = post;
-            console.log("DownVoted");
-            console.log(this.currentPost.downvotes);
-            console.log(this.currentPost.downvotes - 1);
             this.postService.updatePost(
                 this.currentPost.postId,
                 this.currentPost.title,

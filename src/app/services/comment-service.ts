@@ -46,7 +46,7 @@ export class CommentService {
     }
 
     getCommentById(id: number): Observable<any> {
-        const finalURL = this.apiURL + 'comments/' + id;
+        const finalURL = this.apiURL + 'comments/comment/' + id;
 
         return this.http.get(finalURL, { headers: this.headers}).map(data => {
             return data.json();
