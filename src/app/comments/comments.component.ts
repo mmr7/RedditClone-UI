@@ -60,11 +60,9 @@ export class CommentsComponent implements OnInit, OnChanges {
   createCommentClick() {
 
     this.commentService.getAllComments(this.postIdCurrent).then(data => {
-      if (data.length != null) {
-        const newId = data[data.length - 1]['commentId'] + 1;
-        console.log(newId);
+      if (data.length === 0) {
         this.commentService.createComment(
-          newId,
+          1,
           this.body,
           this.loggedInUser.username,
           this.upVotes,
@@ -77,8 +75,10 @@ export class CommentsComponent implements OnInit, OnChanges {
         });
       }
       else {
+        const newId = data[data.length - 1]['commentId'] + 1;
+        console.log(newId);
         this.commentService.createComment(
-          1,
+          newId,
           this.body,
           this.loggedInUser.username,
           this.upVotes,

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user-service';
 import { CommentService } from '../services/comment-service';
 import { User } from '../users/users';
+
 @Component({
     selector: 'app-posts-component',
     templateUrl: 'posts.component.html',
@@ -47,17 +48,14 @@ export class PostsComponent implements OnInit, OnChanges {
         this.postTitle = '';
         this.postLink = '';
         this.postDescription = '';
-        console.log(this.loggedInUser.username);
     }
 
     createPostClick() {
-
+        console.log("ADDING POST NOW")
         this.postService.getAllPosts().then(data => {
-            if (data.length != null) {
-                const newId = data[data.length - 1]['postId'] + 1;
-
+            if (data.length === 0){
                 this.postService.createPost(
-                    newId,
+                    1,
                     this.postTitle,
                     this.postLink,
                     this.postDescription,
@@ -72,8 +70,10 @@ export class PostsComponent implements OnInit, OnChanges {
                 });
             }
             else {
+                const newId = data[data.length - 1]['postId'] + 1;
+
                 this.postService.createPost(
-                    1,
+                    newId,
                     this.postTitle,
                     this.postLink,
                     this.postDescription,
