@@ -1,0 +1,69 @@
+<div class="container-fluid custom-col-wrapper">
+    <a [routerLink]="['/posts']" routerLinkActive="active">Back to Posts</a>
+    <div class="comments">
+        <div class="description">
+            <span> Post Title:  {{ this.currentPost.title }} </span>   
+        </div>
+        <div class="description">
+            <span> Post Link: {{ this.currentPost.link }} </span>          
+        </div>
+        <div class="bottom">
+            <span> Post Created By: {{ this.currentPost.author }} </span>
+        </div>
+
+    </div>
+    <span> Comments: </span>
+    <div class="info" id="login">
+        <div *ngFor="let comment of comments" class="comments">
+            <li class="list-group-item">
+                <div class="voteSystem">
+                    <i class="more-less glyphicon glyphicon-plus" *ngIf="this.userService.loggedInUser == null"></i>
+                    <i class="glyphicon glyphicon glyphicon-plus" *ngIf="this.userService.loggedInUser != null" (click)="upVoteComment(comment.commentId)"></i>
+                    <span class="label label-primary">{{ comment.upvotes }}</span>
+                    <span class="label label-primary">{{ comment.downvotes }}</span>
+                    <i class="more-less glyphicon glyphicon-minus" *ngIf="this.userService.loggedInUser == null"></i>
+                    <i class="more-less glyphicon glyphicon-minus" *ngIf="this.userService.loggedInUser != null" (click)="downVoteComment(comment.commentId)"></i> 
+                </div>
+                <div *ngIf="this.userService.loggedInUser != null">
+                    <div *ngIf="this.loggedInUser.username === comment.author">
+                        <button (click)="deleteComment(comment.commentId)" type="submit" class="btn btn-link buttonDelete"> Delete Comment</button>
+                    </div>
+                </div>
+            </li>
+            <div class="description">
+                <span> Comment: {{ comment.body }} </span>
+            </div>
+            <span class="bottom"> Created By: {{ comment.author }}</span>
+        </div>
+    </div>
+
+    <div *ngIf="this.userService.loggedInUser != null">
+        <button data-toggle="modal" data-target="#modal" (click)="addCommentClick()">Add Comment</button>
+    </div>
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Add Comment</h2>
+                    <button id="close-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            Body:
+                        </div>
+                        <div class="col-lg-8">
+                            <input [(ngModel)]="body" type="text" id="commentBody">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="createCommentClick()" data-dismiss="modal">Create Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

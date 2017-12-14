@@ -1,0 +1,125 @@
+<!-- <div> 
+ <div ng-repeat="post in posts | orderBy:'-upvotes'">
+    <span class="glyphicon glyphicon-thumbs-up"
+      ng-click="incrementUpvotes(post)"></span>
+    {{post.upvotes}}
+    <span style="font-size:20px; margin-left:10px;">
+      <a ng-show="post.link" href="{{post.link}}">
+        {{post.title}}
+      </a>
+      <span ng-hide="post.link">
+        {{post.title}}
+      </span>
+    </span>
+    <span ng-show="post.author">
+      posted by {{post.author}} |
+    </span>
+    <span>
+      <a href="#/posts/{{post._id}}">Comments</a>
+    </span>
+  </div>
+
+  <form ng-submit="addPost()"
+      style="margin-top:30px;" ng-show="isLoggedIn()">
+      <h3>Add a new post</h3>
+
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Title" [(ngModel)]="title"></input>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Link" [(ngModel)]="link"></input>
+      </div>
+      <button type="submit" class="btn btn-primary">Post</button>
+  </form>
+
+  <div ng-hide="isLoggedIn()">
+    <h3>You need to <a href="/login">Log In</a> or <a href="/register">Register</a> before you can add a post.</h3>
+  </div>
+</div> -->
+<div class="container-fluid custom-col-wrapper">
+    <div class="info" id="login">
+        <div *ngFor="let post of posts" class="posts">
+            <li class="list-group-item">
+                <div class="voteSystem">
+                    <i class="more-less glyphicon glyphicon-plus" *ngIf="this.userService.loggedInUser == null"></i>
+                    <i class="more-less glyphicon glyphicon-plus" *ngIf="this.userService.loggedInUser != null" (click)="upVotePost(post.postId)"></i>                
+                    <span class="label label-primary">{{ post.upvotes }}</span>
+                    <span class="label label-primary">{{ post.downvotes }}</span>
+                    <i class="more-less glyphicon glyphicon-minus" *ngIf="this.userService.loggedInUser == null"></i>
+                    <i class="more-less glyphicon glyphicon-minus" *ngIf="this.userService.loggedInUser != null" (click)="downVotePost(post.postId)"></i>    
+                </div>
+                <div *ngIf="this.userService.loggedInUser != null">
+                    <div *ngIf="this.loggedInUser.username === post.author">
+                        <button (click)="deletePost(post.postId)" type="submit" class="btn btn-link buttonDelete"> Delete Post</button>
+                    </div>
+                </div>
+            </li>
+            <div>
+                <button (click)="viewCommentsClick(post.postId)" type="submit" class="btn btn-link title">{{ post.title }}</button>
+            </div>
+            <div class="description">
+                <span> Link: {{post.link }} </span>
+            </div>
+            <div class="description">
+                <span> Description: {{ post.body }} </span>
+            </div>
+            <span class="bottom"> Created By: {{ post.author }}</span>
+        </div>
+        <!-- <div class="right">
+            <app-login-component></app-login-component>
+        </div> -->
+    </div>
+    <div *ngIf="this.userService.loggedInUser != null">
+        <button data-toggle="modal" data-target="#modal" (click)="addPostClick()">Add Post</button>
+    </div>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Add Post</h2>
+                    <button id="close-button" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            Title:
+                        </div>
+                        <div class="col-lg-8">
+                            <input [(ngModel)]="postTitle" type="text" id="postTitle">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            Link:
+                        </div>
+                        <div class="col-lg-8">
+                            <input [(ngModel)]="postLink" type="text">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            Description:
+                        </div>
+                        <div class="col-lg-8">
+                            <textarea rows="4" [(ngModel)]="postDescription" id="postDescription"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="createPostClick()" data-dismiss="modal">Create Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="this.userService.loggedInUser != null">
+        <button class="logout" (click)="logOut()">Log Out</button>
+    </div>
+    <div *ngIf="this.userService.loggedInUser == null">
+        <a [routerLink]="['/login']" routerLinkActive="active">Want to post? Click to Login or Register</a>
+    </div>
+
+
+</div>

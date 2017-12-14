@@ -1,0 +1,84 @@
+.outer_container{
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .row{
+    margin: auto;
+    width: 600px;
+    padding: 10px;
+  }
+
+  .custom-col-wrapper {
+    width: 100%;
+    min-width: 1500px;
+    max-width: 1500px;
+    margin: 0 auto;
+    background-color: white;
+    min-height: 100vh;
+    margin-top:10px;
+}
+
+.modal-body>* {
+    font-size: 1.4em;
+}
+
+.modal-body>.row {
+    margin-bottom: 8px;
+}
+
+.modal-title {
+    text-align: center;
+}
+
+.info{
+    font-size: medium;
+    font-weight: normal;
+    margin-bottom: 1px;
+    display: block;
+}
+
+.posts{
+    border-style: ridge;
+    margin-bottom: 7px;
+    width:60%;
+}
+
+.title{
+    display: block;
+    font-size: 25px;
+}
+
+.description{
+    display: block;
+    font-size: 18px;
+    color: black;
+    padding-left: 10px;
+}
+
+.bottom{
+    padding-left: 10px;
+    color: gray;
+    font-size: 15px;
+}
+
+.right{
+    float:right;
+}
+
+.glyphicon {
+    opacity: 1;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+  }
+  
+.glyphicon:hover {
+    opacity: 0.75;
+    cursor: pointer;
+}
+
+.buttonDelete {
+    padding-left: 0px;
+}
