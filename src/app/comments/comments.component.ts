@@ -32,9 +32,6 @@ export class CommentsComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.router.params.subscribe(params => {
       this.postIdCurrent = Number.parseInt(params['postId']);
-      console.log("THIS IS THE CURRENT POST ID")
-      console.log(this.postIdCurrent);
-      console.log("USERNAME ::: ")
     });
     this.commentService.getAllComments(this.postIdCurrent).then(list => {
       this.comments = list;
@@ -53,8 +50,6 @@ export class CommentsComponent implements OnInit, OnChanges {
 
   addCommentClick() {
     this.body = '';
-    console.log("USERNAME ::: ")
-    console.log(this.loggedInUser.username);
   }
 
   createCommentClick() {
@@ -76,7 +71,6 @@ export class CommentsComponent implements OnInit, OnChanges {
       }
       else {
         const newId = data[data.length - 1]['commentId'] + 1;
-        console.log(newId);
         this.commentService.createComment(
           newId,
           this.body,

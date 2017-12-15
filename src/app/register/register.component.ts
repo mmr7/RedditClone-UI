@@ -19,13 +19,6 @@ export class RegisterComponent {
 
 
   registerClick(): void {
-      console.log('user: ' + this.username);
-      console.log('pass: ' + this.password);
-      console.log('pass2: ' + this.password2);
-      console.log('first: ' + this.firstName);
-      console.log('last: ' + this.lastName);
-
-
       this.userService.getUserCount().then(
           data => {
               if (data.length != null) {

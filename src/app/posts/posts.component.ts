@@ -51,7 +51,6 @@ export class PostsComponent implements OnInit, OnChanges {
     }
 
     createPostClick() {
-        console.log("ADDING POST NOW")
         this.postService.getAllPosts().then(data => {
             if (data.length === 0){
                 this.postService.createPost(

@@ -59,7 +59,6 @@ export class CommentService {
             {commentId: commentId, body: body, author: author, upvotes: upvotes, downvotes: downvotes, postId: postId },
             { headers: this.headers })
             .map(event => {
-                console.log(event.json());
             });
     }
 
